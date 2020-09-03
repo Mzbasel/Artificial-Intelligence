@@ -1,0 +1,55 @@
+isnumber(zero).
+isnumber(s(X)) :- isnumber(X).
+
+isequal(X,X) :- isnumber(X).
+isequal(s(X), s(Y)) :- isequal(X,Y).
+
+lessthanequal(zero,X) :- isnumber(X). 
+lessthanequal(s(X),s(Y)) :- lessthanequal(X,Y).
+
+add(zero,X,X) :- isnumber(X).
+add(s(X),Y,s(Z)) :- add(X,Y,Z).
+/*add(s(zero),s(s(zero)),X).*/
+
+even(zero).
+even(s(s(X))) :- even(X).
+/*s(zero) halinde yaz*/
+/*sona X koy*/
+
+odd(s(zero)).
+odd(s(s(X))) :- odd(X).
+/*s(zero) halinde yaz*/
+/*sona X koy*/
+
+times(zero,X,zero).
+times(s(X),Y,Z):-times(X,Y,A), add(Y,A,Z).
+/*times(s(s(zero)),s(zero),X).*/
+
+
+
+division(X,X,s(zero)).
+division(X,Y,Z) :- times(Y,Z,R), R=X. 
+
+/*division(s(s(zero)),s(zero),X).*/
+
+
+remainder(X,X,zero).
+remainder(X,Y,Z) :- Z is mod(X,Y).
+/*soruyoruz remainder(3,2,X)*/
+
+factorial(X,Y) :- X is 0, Y is 1;
+X > 0, M is X - 1, factorial(M,Z), Y is X*Z.
+/*factorial(5,X).*/
+
+fibonacci(0,0).
+fibonacci(1,1).
+fibonacci(N,F) :- N1 is N-1, N2 is N-2, fibonacci(N1,F1), fibonacci(N2,F2), F is F1 + F2.
+/*fibonacci(7,X). hangi sirada oldugunu yaziyoruz*/
+
+
+shownum(zero,0).
+shownum(X,T) :- shownum(A,O), add(A,s(zero),X), T is O + 1.
+
+/*shownum(s(s(zero)),X).*/
+
+
